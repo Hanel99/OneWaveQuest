@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Actor : MonoBehaviour
 {
-    public void ApplySkill(Actor target)
+    public virtual void ApplySkill(Actor target)
     {
-        
+
     }
 }
