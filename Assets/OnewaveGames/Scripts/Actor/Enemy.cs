@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Enemy : Actor
 {
-
-
     public override void ApplySkill(Actor target)
     {
         if (target is Player player)

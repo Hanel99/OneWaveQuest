@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 적에게 피해를 주는 효과입니다. 플레이어의 공격력 만큼 데미지를 입힙니다.
+/// </summary>
 public class HitEnemyEffect : Effect
 {
 
