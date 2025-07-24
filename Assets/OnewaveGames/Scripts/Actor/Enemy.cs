@@ -8,19 +8,12 @@ public class Enemy : Actor
     {
         if (target is Player player)
         {
-            // 스킬 효과 적용
-            Debug.Log("Enemy applies skill to Player");
+            // 몬스터가 플레이어에게 가할 스킬
         }
     }
 
-    public void Grab()
+    public void OnGrabbed()
     {
-        Debug.Log("Enemy grabs the player");
-    }
-
-    public void TakeDamage(int damage)
-    {
-        // 적이 피해를 받는 로직
-        Debug.Log($"Enemy takes {damage} damage");
+        Debug.Log("붙잡힘!");
     }
 }

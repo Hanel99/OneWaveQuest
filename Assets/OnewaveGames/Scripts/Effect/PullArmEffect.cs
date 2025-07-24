@@ -9,6 +9,8 @@ public class PullArmEffect : Effect
 {
     public override void Apply(Actor source, Actor target)
     {
+        // TODO 투사체가 플레이어에게 다시 돌아와야 되는데... 
+
         // Implement the logic to pull the arm of the target actor
         // This could involve changing the position or rotation of the target's arm
         // For example:

@@ -184,9 +184,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b45087a579539b4289f7c04a0ba1a5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  capsuleCollider: {fileID: 0}
+  characterController: {fileID: -1105729859603398693}
   skillData: {fileID: 11400000, guid: c7e907c75e5002a4fa2b0be8e5d004fb, type: 2}
   moveSpeed: 5
   rotationSpeed: 720
+  AttackPower: 10
 --- !u!143 &-1105729859603398693
 CharacterController:
   m_ObjectHideFlags: 0
@@ -212,4 +215,4 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}

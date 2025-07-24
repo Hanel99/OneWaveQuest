@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public abstract class Skill
 {
-    private List<Effect> EffectList { get; } = new();
+    public List<Effect> EffectList { get; } = new();
 
     public abstract bool ApplySkill(Actor source, Actor target);
 }

@@ -15,19 +15,34 @@ public class ThrowArmSkill : Skill
 {
     public override bool ApplySkill(Actor source, Actor target)
     {
-        if (target is Enemy enemy)
+        EffectList.Clear();
+        EffectList.Add(new ThrowArmEffect());
+
+
+
+        foreach (var effect in EffectList)
         {
-            // 적에게 스킬 적용
-            enemy.ApplySkill(source);
-            return true;
-        }
-        else if (target is Player player)
-        {
-            // 플레이어에게 스킬 적용
-            player.ApplySkill(source);
-            return true;
+            // 각 효과를 적용합니다.
+            effect.Apply(source, target);
+
+            //TODO 지속시간, 타겟위치 등 추가적인 기능을 넣어야 할까...
         }
 
-        return false; // 스킬 적용 실패
+        // if (target is Enemy enemy)
+        // {
+        //     // 적에게 스킬 적용
+        //     enemy.ApplySkill(source);
+        //     return true;
+        // }
+        // else if (target is Player player)
+        // {
+        //     // 플레이어에게 스킬 적용
+        //     player.ApplySkill(source);
+        //     return true;
+        // }
+
+        return true;
     }
+
+
 }

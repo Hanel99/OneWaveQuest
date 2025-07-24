@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Arm Skill Data", menuName = "Skills/Arm Skill Data")]
+[CreateAssetMenu(fileName = "Arm Skill Data", menuName = "ScriptableObjects/Arm Skill Data")]
 public class ArmSkillData : ScriptableObject
 {
     [Header("기본 설정")]

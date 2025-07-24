@@ -7,7 +7,6 @@ using UnityEngine;
 /// </summary>
 public class HitEnemyEffect : Effect
 {
-
     public override void Apply(Actor source, Actor target)
     {
         if (source is Player player && target is Enemy enemy)

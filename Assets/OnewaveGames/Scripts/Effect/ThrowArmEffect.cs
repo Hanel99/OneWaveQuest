@@ -7,17 +7,22 @@ using UnityEngine;
 /// </summary>
 public class ThrowArmEffect : Effect
 {
+    public Vector3 targetPosition; // 투사체가 도달할 목표 위치
+
     public override void Apply(Actor source, Actor target)
     {
-        if (source is Enemy enemy && target is Player player)
+        if (source is Player player && target is Enemy targetEnemy)
         {
-            // 적이 플레이어를 던지는 효과 적용
-            enemy.Grab();
-            Debug.Log("Enemy throws the player");
+            Debug.Log("팔을 던짐");
+
+            // TODO 가다가 투사체가 적에게 닿으면 해당 적을 끌고 옴
+            {
+                targetEnemy.OnGrabbed();
+            }
         }
         else
         {
-            Debug.LogWarning("ThrowArmEffect can only be applied by an Enemy to a Player.");
+            Debug.LogWarning("ThrowArmEffect can only be applied by a Player to an Enemy.");
         }
     }
 }

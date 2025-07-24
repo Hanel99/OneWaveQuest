@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b82bc190aab2b6b4396c7897b3034c90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  capsuleCollider: {fileID: 0}
+  characterController: {fileID: -804368820084857039}
 --- !u!143 &-804368820084857039
 CharacterController:
   m_ObjectHideFlags: 0
@@ -72,7 +73,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &8232786686934949609
 GameObject:
   m_ObjectHideFlags: 0

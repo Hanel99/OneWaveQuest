@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class Player : Actor
 {
 
-    [Header("스킬 데이터")]
+    [Header("스킬 데이터(플레이어 스탯)")]
     public ArmSkillData skillData;
 
 
@@ -20,13 +20,11 @@ public class Player : Actor
     private bool leftClickPressed;
 
     // 컴포넌트
-    private CharacterController characterController;
     private Camera playerCamera;
 
     void Start()
     {
         // 컴포넌트 가져오기
-        characterController = GetComponent<CharacterController>();
         playerCamera = Camera.main;
     }
 
@@ -77,8 +75,17 @@ public class Player : Actor
     // Input System 이벤트 함수들
     public void OnMove(InputValue value)
     {
-        Debug.Log("OnMove2 action triggered");
         moveInput = value.Get<Vector2>();
+
+        if (moveInput.y > 0)
+            Debug.Log("위쪽 입력");
+        else if (moveInput.y < 0)
+            Debug.Log("아래쪽 입력");
+
+        if (moveInput.x > 0)
+            Debug.Log("오른쪽 입력");
+        else if (moveInput.x < 0)
+            Debug.Log("왼쪽 입력");
     }
 
     // public void OnLook(InputAction.CallbackContext context)
@@ -131,12 +138,7 @@ public class Player : Actor
 
     public override void ApplySkill(Actor target)
     {
-        if (target is Enemy enemy)
-        {
-            if (enemy != null)
-            {
-                enemy.Grab();
-            }
-        }
+        // 잡기 스킬 사용
+
     }
 }
