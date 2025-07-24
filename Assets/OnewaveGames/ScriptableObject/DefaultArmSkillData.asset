@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50acd9b9320f97438e1efe711eaff06, type: 3}
+  m_Name: DefaultArmSkillData
+  m_EditorClassIdentifier: 
+  armSpeed: 10
+  maxDistance: 15
+  detectionRadius: 1
+  returnCompleteDistance: 0.5
+  enemyDamage: 50
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  armPrefab: {fileID: 0}
+  captureEffect: {fileID: 0}
+  returnEffect: {fileID: 0}
+  throwSound: {fileID: 0}
+  captureSound: {fileID: 0}
+  returnSound: {fileID: 0}
+  cooldownTime: 2
+  enemyPlacementDistance: 2
+  returnSpeedMultiplier: 1.2

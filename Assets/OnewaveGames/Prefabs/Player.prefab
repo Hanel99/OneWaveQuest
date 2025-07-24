@@ -184,6 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b45087a579539b4289f7c04a0ba1a5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillData: {fileID: 11400000, guid: c7e907c75e5002a4fa2b0be8e5d004fb, type: 2}
   moveSpeed: 5
   rotationSpeed: 720
 --- !u!143 &-1105729859603398693

@@ -19,4 +19,10 @@ public class Enemy : Actor
     {
         Debug.Log("Enemy grabs the player");
     }
+
+    public void TakeDamage(int damage)
+    {
+        // 적이 피해를 받는 로직
+        Debug.Log($"Enemy takes {damage} damage");
+    }
 }

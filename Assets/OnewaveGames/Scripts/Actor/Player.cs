@@ -6,9 +6,14 @@ using UnityEngine.InputSystem;
 public class Player : Actor
 {
 
+    [Header("스킬 데이터")]
+    public ArmSkillData skillData;
+
+
     [Header("Movement Settings")]
     public float moveSpeed = 5f;
     public float rotationSpeed = 720f;
+    public int AttackPower = 10;
 
     // 입력 값 저장
     private Vector2 moveInput;
