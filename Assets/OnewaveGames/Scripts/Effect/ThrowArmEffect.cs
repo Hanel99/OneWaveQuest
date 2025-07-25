@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,22 +8,32 @@ using UnityEngine;
 /// </summary>
 public class ThrowArmEffect : Effect
 {
-    public Vector3 targetPosition; // 투사체가 도달할 목표 위치
+    public Vector3 targetPosition;
 
     public override void Apply(Actor source, Actor target)
     {
-        if (source is Player player && target is Enemy targetEnemy)
+        if (source is Player player)
         {
-            Debug.Log("팔을 던짐");
+            var armProjectilePrefab = player.skillData.armProjectilePrefab;
+            var playerPosition = player.transform.position;
+            var direction = (targetPosition - playerPosition).normalized;
 
-            // TODO 가다가 투사체가 적에게 닿으면 해당 적을 끌고 옴
-            {
-                targetEnemy.OnGrabbed();
-            }
+            var currentArm = GameObject.Instantiate(armProjectilePrefab, playerPosition, Quaternion.LookRotation(direction));
+            var projectile = currentArm.GetComponent<Arm>();
+
+            projectile.Initialize(player.skillData.detectionRadius);
+            projectile.OnEnemyDetected += OnEnemyDetected;
+            projectile.LaunchToTarget(targetPosition);
         }
         else
         {
-            Debug.LogWarning("ThrowArmEffect can only be applied by a Player to an Enemy.");
+            Debug.LogWarning("ThrowArmEffect can only be applied by a Player.");
         }
+    }
+
+    // 이벤트 핸들러 예시
+    private void OnEnemyDetected(Actor enemy)
+    {
+        enemy.GetComponent<Enemy>().OnGrabbed();
     }
 }

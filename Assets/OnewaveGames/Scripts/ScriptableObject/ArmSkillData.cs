@@ -3,6 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Arm Skill Data", menuName = "ScriptableObjects/Arm Skill Data")]
 public class ArmSkillData : ScriptableObject
 {
+    [Header("프리팹 설정")]
+    [Tooltip("팔 투사체 프리팹")]
+    public GameObject armProjectilePrefab;
+
     [Header("기본 설정")]
     [Tooltip("팔 이동 속도")]
     public float armSpeed = 10f;

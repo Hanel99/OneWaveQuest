@@ -9,5 +9,7 @@ public abstract class Skill
 {
     public List<Effect> EffectList { get; } = new();
 
-    public abstract bool ApplySkill(Actor source, Actor target);
+
+    public abstract void SetEffectList(Actor source, Actor target, Vector3 targetPosition);
+    public abstract bool ApplySkill(Actor source, Actor target, Vector3 targetPosition);
 }

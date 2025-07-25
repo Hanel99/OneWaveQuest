@@ -13,6 +13,16 @@ public class Actor : MonoBehaviour
 
     }
 
+    public virtual void ApplySkill(Vector3 target)
+    {
+
+    }
+
+    public virtual void ApplySkill(Transform transform)
+    {
+
+    }
+
 
     void Start()
     {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 /// <summary>
@@ -13,35 +14,28 @@ using UnityEngine;
 /// </summary>
 public class ThrowArmSkill : Skill
 {
-    public override bool ApplySkill(Actor source, Actor target)
+    public override void SetEffectList(Actor source, Actor target, Vector3 targetPosition)
     {
         EffectList.Clear();
-        EffectList.Add(new ThrowArmEffect());
 
+        var throwArmEffect = new ThrowArmEffect();
+        throwArmEffect.skill = this;
+        throwArmEffect.targetPosition = target == null ? targetPosition : target.transform.position;
+        EffectList.Add(throwArmEffect);
+    }
 
-
-        foreach (var effect in EffectList)
+    public override bool ApplySkill(Actor source, Actor target, Vector3 targetPosition)
+    {
+        if (EffectList.Count > 0)
         {
-            // 각 효과를 적용합니다.
-            effect.Apply(source, target);
-
-            //TODO 지속시간, 타겟위치 등 추가적인 기능을 넣어야 할까...
+            EffectList[0].Apply(source, target);
+            EffectList.RemoveAt(0); // 첫 번째 효과를 적용한 후 리스트에서 제거합니다.
+            return true; // 스킬 적용 성공
         }
-
-        // if (target is Enemy enemy)
-        // {
-        //     // 적에게 스킬 적용
-        //     enemy.ApplySkill(source);
-        //     return true;
-        // }
-        // else if (target is Player player)
-        // {
-        //     // 플레이어에게 스킬 적용
-        //     player.ApplySkill(source);
-        //     return true;
-        // }
-
-        return true;
+        else
+        {
+            return false; // 효과가 설정되지 않은 경우 스킬 적용 실패
+        }
     }
 
 

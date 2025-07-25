@@ -8,12 +8,12 @@ public class Enemy : Actor
     {
         if (target is Player player)
         {
-            // 몬스터가 플레이어에게 가할 스킬
+            // 몬스터가 플레이어에게 가할 스킬. 여기서는 구현하지 않음.
         }
     }
 
     public void OnGrabbed()
     {
-        Debug.Log("붙잡힘!");
+        Debug.Log($"{this.name} 붙잡힘!");
     }
 }

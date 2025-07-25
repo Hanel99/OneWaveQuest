@@ -77,15 +77,15 @@ public class Player : Actor
     {
         moveInput = value.Get<Vector2>();
 
-        if (moveInput.y > 0)
-            Debug.Log("위쪽 입력");
-        else if (moveInput.y < 0)
-            Debug.Log("아래쪽 입력");
+        // if (moveInput.y > 0)
+        //     Debug.Log("위쪽 입력");
+        // else if (moveInput.y < 0)
+        //     Debug.Log("아래쪽 입력");
 
-        if (moveInput.x > 0)
-            Debug.Log("오른쪽 입력");
-        else if (moveInput.x < 0)
-            Debug.Log("왼쪽 입력");
+        // if (moveInput.x > 0)
+        //     Debug.Log("오른쪽 입력");
+        // else if (moveInput.x < 0)
+        //     Debug.Log("왼쪽 입력");
     }
 
     // public void OnLook(InputAction.CallbackContext context)
@@ -112,33 +112,39 @@ public class Player : Actor
 
         // 마우스 위치로 레이캐스트
         Ray ray = playerCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+
+
         if (Physics.Raycast(ray, out RaycastHit hit, 100f))
         {
+            Debug.Log($"클릭 좌표: {hit.point}");
             Debug.Log($"공격 대상: {hit.collider.name}");
 
-            // 공격 대상 처리
-            if (hit.collider.CompareTag("Enemy"))
-            {
-                Debug.Log("Enemy hit detected");
-                ApplySkill(hit.collider.GetComponent<Actor>());
-            }
+            ApplySkill(hit.point);
 
-            // 공격 이펙트 생성
-            CreateAttackEffect(hit.point);
+            // 공격 대상 처리
+            // if (hit.collider.CompareTag("Enemy"))
+            // {
+            //     Debug.Log("Enemy hit detected");
+            //     ApplySkill(hit.collider.transform.parent.GetComponent<Actor>());
+            // }
+
         }
     }
 
-    void CreateAttackEffect(Vector3 position)
-    {
-        // 공격 이펙트 파티클이나 이펙트 생성
-        // 예시: 파티클 시스템 재생
-        Debug.Log($"공격 이펙트 생성 at {position}");
-    }
 
 
-    public override void ApplySkill(Actor target)
+    public override void ApplySkill(Vector3 targetPosition)
     {
         // 잡기 스킬 사용
-
+        var throwArmSkill = new ThrowArmSkill();
+        throwArmSkill.SetEffectList(this, null, targetPosition);
+        if (throwArmSkill.ApplySkill(this, null, targetPosition))
+        {
+            Debug.Log("ThrowArmSkill applied successfully.");
+        }
+        else
+        {
+            Debug.LogWarning("Failed to apply ThrowArmSkill.");
+        }
     }
 }
