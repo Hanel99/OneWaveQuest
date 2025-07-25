@@ -9,24 +9,19 @@ public class ArmSkillData : ScriptableObject
 
     [Header("기본 설정")]
     [Tooltip("팔 이동 속도")]
-    public float armSpeed = 10f;
+    public float armSpeed = 30f;
 
     [Tooltip("최대 던지기 거리")]
     public float maxDistance = 15f;
 
     [Tooltip("에너미 감지 반경")]
-    public float detectionRadius = 1f;
+    public float detectionRadius = 0.5f;
 
 
 
     [Header("데미지 설정")]
     [Tooltip("잡힌 에너미에게 주는 데미지")]
     public int enemyDamage = 50;
-
-
-    [Header("레이어 설정")]
-    [Tooltip("에너미 레이어")]
-    public LayerMask enemyLayer = 1 << 6;
 
 
 

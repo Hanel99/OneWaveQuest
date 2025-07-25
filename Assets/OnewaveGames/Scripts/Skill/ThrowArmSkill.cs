@@ -38,5 +38,11 @@ public class ThrowArmSkill : Skill
         }
     }
 
+    public override void EndSkill()
+    {
+        Debug.Log("ThrowArmSkill has ended.");
+
+    }
+
 
 }

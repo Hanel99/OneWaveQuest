@@ -9,6 +9,10 @@ public class GamaManager : MonoBehaviour
     public Player player;
     public Enemy enemy;
 
+    public ActorStatData playerStatData;
+    public ActorStatData enemyStatData;
+    public ArmSkillData armSkillData;
+
 
     void Awake()
     {

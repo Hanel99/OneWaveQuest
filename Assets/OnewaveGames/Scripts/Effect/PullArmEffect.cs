@@ -7,17 +7,57 @@ using UnityEngine;
 /// </summary>
 public class PullArmEffect : Effect
 {
+    public Arm arm;
+
     public override void Apply(Actor source, Actor target)
     {
-        // TODO 투사체가 플레이어에게 다시 돌아와야 되는데... 
+        if (source is Enemy enemy && target is Player player)
+        {
+            Debug.Log($"적을 붙입니다: {enemy.name}");
 
-        // Implement the logic to pull the arm of the target actor
-        // This could involve changing the position or rotation of the target's arm
-        // For example:
-        Vector3 pullDirection = (target.transform.position - source.transform.position).normalized;
-        float pullDistance = 1.0f; // Adjust this value as needed
-        target.transform.position += pullDirection * pullDistance;
+            enemy.transform.SetParent(arm.attachPoint);
+            enemy.transform.localPosition = Vector3.zero;
+            enemy.transform.localRotation = Quaternion.identity;
 
-        // Optionally, you can add visual or sound effects here
+            // 적의 물리 비활성화
+            DisableEnemyPhysics(enemy.gameObject);
+        }
+    }
+
+
+    private void DisableEnemyPhysics(GameObject enemy)
+    {
+        // Rigidbody 처리
+        var rigidbody = enemy.GetComponent<Rigidbody>();
+        if (rigidbody != null)
+        {
+            rigidbody.isKinematic = true;
+            rigidbody.detectCollisions = false;
+        }
+
+        // 콜리더 비활성화 (다른 오브젝트와 충돌 방지)
+        var colliders = enemy.GetComponents<Collider>();
+        foreach (var collider in colliders)
+        {
+            collider.enabled = false;
+        }
+    }
+
+    private void EnableEnemyPhysics(GameObject enemy)
+    {
+        // Rigidbody 처리
+        var rigidbody = enemy.GetComponent<Rigidbody>();
+        if (rigidbody != null)
+        {
+            rigidbody.isKinematic = false;
+            rigidbody.detectCollisions = true;
+        }
+
+        // 콜리더 다시 활성화
+        var colliders = enemy.GetComponents<Collider>();
+        foreach (var collider in colliders)
+        {
+            collider.enabled = true;
+        }
     }
 }

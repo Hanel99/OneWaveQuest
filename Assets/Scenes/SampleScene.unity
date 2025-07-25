@@ -318,6 +318,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1048515655}
   - component: {fileID: 1048515656}
+  - component: {fileID: 1048515657}
+  - component: {fileID: 1048515658}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -354,6 +356,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 6286709950722922016}
   enemy: {fileID: 737243654150728184}
+  playerStatData: {fileID: 11400000, guid: 47707bdbe5dc42b4eafbd4ce3c88ec71, type: 2}
+  enemyStatData: {fileID: 11400000, guid: 3217342601232954ea6617381cea45be, type: 2}
+  armSkillData: {fileID: 11400000, guid: c7e907c75e5002a4fa2b0be8e5d004fb, type: 2}
+--- !u!114 &1048515657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048515654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f16823c0d0572c14d89ab75a686f31ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armProjectilePrefab: {fileID: 20172529523260553, guid: 3c9ae1e3d3aef7643b3f217349e77469, type: 3}
+--- !u!114 &1048515658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048515654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df1bb58880e772408508ef548ad3ff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1705588077
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,6 +614,10 @@ PrefabInstance:
       propertyPath: inputActions
       value: 
       objectReference: {fileID: -944628639613478452, guid: 9a3265bf17098314897e17219cb04e54, type: 3}
+    - target: {fileID: 1712857224410415711, guid: 5e314a5212becef4293b65959b9f1319, type: 3}
+      propertyPath: actorStatData
+      value: 
+      objectReference: {fileID: 11400000, guid: 47707bdbe5dc42b4eafbd4ce3c88ec71, type: 2}
     - target: {fileID: 1750307194324258090, guid: 5e314a5212becef4293b65959b9f1319, type: 3}
       propertyPath: m_NotificationBehavior
       value: 0

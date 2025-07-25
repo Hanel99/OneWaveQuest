@@ -270,7 +270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   capsuleCollider: {fileID: 0}
   characterController: {fileID: -1105729859603398693}
-  actorStatData: {fileID: 0}
+  actorStatData: {fileID: 11400000, guid: 47707bdbe5dc42b4eafbd4ce3c88ec71, type: 2}
   skillData: {fileID: 11400000, guid: c7e907c75e5002a4fa2b0be8e5d004fb, type: 2}
   moveSpeed: 5
   rotationSpeed: 720

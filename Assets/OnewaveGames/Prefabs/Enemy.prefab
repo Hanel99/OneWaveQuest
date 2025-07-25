@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   capsuleCollider: {fileID: 0}
   characterController: {fileID: -804368820084857039}
-  actorStatData: {fileID: 0}
+  actorStatData: {fileID: 11400000, guid: 3217342601232954ea6617381cea45be, type: 2}
 --- !u!143 &-804368820084857039
 CharacterController:
   m_ObjectHideFlags: 0

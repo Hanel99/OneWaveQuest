@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class Arm : Projectile
 {
+    public Transform attachPoint; // 적 담아놓을 오브젝트
+
+    [Header("스킬 데이터")]
+    public ArmSkillData skillData;
+
     [Header("디버그")]
     [SerializeField] private bool showGizmos = true;
 
     // 이벤트
     public System.Action<Actor> OnEnemyDetected;
-    public System.Action OnProjectileDestroyed;
 
     // 상태
     private bool isActive = true;
@@ -17,15 +21,9 @@ public class Arm : Projectile
 
 
     // 이동 관련 변수
-    private Vector3 startPosition;
     private Vector3 direction;
     private float distanceTraveled;
     private bool isMoving = false;
-
-    [Header("이동 설정")]
-    [SerializeField] private float moveSpeed = 10f;
-    [SerializeField] private float maxDistance = 15f;
-
 
     void Awake()
     {
@@ -49,9 +47,10 @@ public class Arm : Projectile
         if (capsuleCollider != null) capsuleCollider.isTrigger = true;
     }
 
-    public void Initialize(float detectionRadius = 1f)
+    public void Initialize()
     {
-        if (capsuleCollider != null) capsuleCollider.radius = detectionRadius;
+        capsuleCollider.radius = skillData.detectionRadius;
+        OnEnemyDetected = null;
 
         isActive = true;
         detectedEnemy = null;
@@ -59,21 +58,11 @@ public class Arm : Projectile
 
 
 
-    public void SetDetectionRadius(float radius)
-    {
-        if (capsuleCollider != null)
-        {
-            capsuleCollider.radius = radius;
-        }
-    }
-
-
 
 
 
     public void LaunchProjectile(Vector3 targetDirection)
     {
-        startPosition = transform.position;
         direction = targetDirection.normalized;
         distanceTraveled = 0f;
         isMoving = true;
@@ -84,7 +73,7 @@ public class Arm : Projectile
             transform.rotation = Quaternion.LookRotation(direction);
         }
 
-        Debug.Log($"투사체 발사: 방향 {direction}, 속도 {moveSpeed}, 최대거리 {maxDistance}");
+        Debug.Log($"투사체 발사: 방향 {direction}, 속도 {skillData.armSpeed}, 최대거리 {skillData.maxDistance}");
     }
 
     public void LaunchToTarget(Vector3 targetPosition)
@@ -102,21 +91,21 @@ public class Arm : Projectile
     private void MoveProjectile()
     {
         // 이동 거리 계산
-        float moveDistance = moveSpeed * Time.deltaTime;
+        float moveDistance = skillData.armSpeed * Time.deltaTime;
 
         // 최대 거리 체크
-        if (distanceTraveled + moveDistance >= maxDistance)
+        if (distanceTraveled + moveDistance >= skillData.maxDistance)
         {
             // 정확히 최대 거리까지만 이동
-            float remainingDistance = maxDistance - distanceTraveled;
+            float remainingDistance = skillData.maxDistance - distanceTraveled;
             transform.position += direction * remainingDistance;
-            distanceTraveled = maxDistance;
+            distanceTraveled = skillData.maxDistance;
 
             // 이동 정지
             isMoving = false;
 
             Debug.Log("투사체가 최대 거리에 도달했습니다");
-            this.gameObject.SetActive(false); // 투사체 비활성화
+            this.ReturnToPool();
             return;
         }
 
@@ -157,33 +146,9 @@ public class Arm : Projectile
 
             // 이벤트 호출
             OnEnemyDetected?.Invoke(detectedEnemy);
-            this.gameObject.SetActive(false); // 투사체 비활성화
+            this.ReturnToPool(); // 투사체 풀로 반환
         }
     }
-
-    // void OnTriggerExit(Collider other)
-    // {
-    //     if (!isActive) return;
-
-    //     // 감지된 적이 범위를 벗어났을 때
-    //     if (other.gameObject == detectedEnemy)
-    //     {
-    //         Debug.Log($"적이 범위를 벗어남: {detectedEnemy.name}");
-    //         detectedEnemy = null;
-    //     }
-    // }
-
-
-
-    // 투사체 제거
-    public void DestroyProjectile()
-    {
-        OnProjectileDestroyed?.Invoke();
-        Destroy(gameObject);
-    }
-
-
-
 
 
 

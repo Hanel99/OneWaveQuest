@@ -9,6 +9,9 @@ public abstract class Effect
 {
     public Skill skill;    // 이 Effect가 속한 Skill
     public abstract void Apply(Actor source, Actor target);
+
+
+    //해당 이펙트가 종료되었음을 알려줌... 인데 필요한가?
     public virtual void End(Actor source, Actor target, Vector3 targetPosition)
     {
         skill.ApplySkill(source, target, targetPosition);

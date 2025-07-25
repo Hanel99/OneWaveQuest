@@ -12,4 +12,5 @@ public abstract class Skill
 
     public abstract void SetEffectList(Actor source, Actor target, Vector3 targetPosition);
     public abstract bool ApplySkill(Actor source, Actor target, Vector3 targetPosition);
+    public abstract void EndSkill();
 }

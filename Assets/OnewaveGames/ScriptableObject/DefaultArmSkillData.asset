@@ -12,20 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d50acd9b9320f97438e1efe711eaff06, type: 3}
   m_Name: DefaultArmSkillData
   m_EditorClassIdentifier: 
-  armSpeed: 10
+  armProjectilePrefab: {fileID: 8730835212162200801, guid: 3c9ae1e3d3aef7643b3f217349e77469, type: 3}
+  armSpeed: 30
   maxDistance: 15
-  detectionRadius: 1
-  returnCompleteDistance: 0.5
+  detectionRadius: 0.5
   enemyDamage: 50
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  armPrefab: {fileID: 0}
-  captureEffect: {fileID: 0}
-  returnEffect: {fileID: 0}
-  throwSound: {fileID: 0}
-  captureSound: {fileID: 0}
-  returnSound: {fileID: 0}
   cooldownTime: 2
   enemyPlacementDistance: 2
   returnSpeedMultiplier: 1.2

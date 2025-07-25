@@ -1,23 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : Actor
 {
 
-    [Header("스킬 데이터(플레이어 스탯)")]
-    public ArmSkillData skillData;
-
-
     [Header("Movement Settings")]
-    public float moveSpeed = 5f;
     public float rotationSpeed = 720f;
-    public int AttackPower = 10;
 
     // 입력 값 저장
     private Vector2 moveInput;
     private bool leftClickPressed;
+    private bool isCoolDown = false;
 
     // 컴포넌트
     private Camera playerCamera;
@@ -36,7 +32,7 @@ public class Player : Actor
 
     void HandleMovement()
     {
-        if (moveInput != Vector2.zero)
+        if (moveInput != Vector2.zero && isCoolDown == false)
         {
             // 카메라 기준으로 이동 방향 계산
             Vector3 cameraForward = playerCamera.transform.forward;
@@ -52,7 +48,7 @@ public class Player : Actor
             Vector3 moveDirection = cameraForward * moveInput.y + cameraRight * moveInput.x;
 
             // 캐릭터 이동
-            characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
+            characterController.Move(moveDirection * actorStatData.MoveSpeed * Time.deltaTime);
 
             // 캐릭터 회전
             if (moveDirection != Vector3.zero)
@@ -71,6 +67,8 @@ public class Player : Actor
             PerformAttack();
         }
     }
+
+
 
     // Input System 이벤트 함수들
     public void OnMove(InputValue value)
@@ -141,10 +139,20 @@ public class Player : Actor
         if (throwArmSkill.ApplySkill(this, null, targetPosition))
         {
             Debug.Log("ThrowArmSkill applied successfully.");
+            StartCoroutine(Co_CoolDown(GamaManager.Instance.armSkillData.cooldownTime));
         }
         else
         {
             Debug.LogWarning("Failed to apply ThrowArmSkill.");
         }
+    }
+
+
+    IEnumerator Co_CoolDown(float coolDownTime)
+    {
+        // 쿨타임 동안 대기
+        isCoolDown = true;
+        yield return new WaitForSeconds(coolDownTime);
+        isCoolDown = false;
     }
 }
