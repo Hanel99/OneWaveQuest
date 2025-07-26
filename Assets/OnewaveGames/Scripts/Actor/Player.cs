@@ -100,14 +100,18 @@ public class Player : Actor
         }
     }
 
+    void OnReset()
+    {
+        Debug.Log("F5 pressed, reloading scene...");
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    }
+
 
 
 
 
     void PerformAttack()
     {
-        Debug.Log("left click pressed, performing attack");
-
         // 마우스 위치로 레이캐스트
         Ray ray = playerCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
@@ -115,7 +119,6 @@ public class Player : Actor
         if (Physics.Raycast(ray, out RaycastHit hit, 100f))
         {
             Debug.Log($"클릭 좌표: {hit.point}");
-            Debug.Log($"공격 대상: {hit.collider.name}");
 
             ApplySkill(hit.point);
 
@@ -131,18 +134,16 @@ public class Player : Actor
 
 
 
+    public void OnArmReached()
+    {
+        Debug.Log("팔이 플레이어에게 돌아왔습니다.");
+    }
+
+
+
     public override void ApplySkill(Vector3 targetPosition)
     {
         // 잡기 스킬 사용
-        var throwArmSkill = new ThrowArmSkill();
-        throwArmSkill.SetEffectList(this, null, targetPosition);
-        if (throwArmSkill.ApplySkill(this, null, targetPosition))
-        {
-            Debug.Log("ThrowArmSkill applied successfully.");
-        }
-        else
-        {
-            Debug.LogWarning("Failed to apply ThrowArmSkill.");
-        }
+        SkillManager.Instance.UseThrowArmSkill(this, null, targetPosition);
     }
 }

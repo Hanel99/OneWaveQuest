@@ -7,34 +7,42 @@ using UnityEngine;
 /// </summary>
 public class PullArmEffect : Effect
 {
-    public Arm arm;
-
     public override void Apply(Actor source, Actor target)
     {
-        if (source is Enemy enemy && target is Player player)
+        if (source is Player player && target is Enemy enemy)
         {
             Debug.Log($"적을 붙입니다: {enemy.name}");
 
-            enemy.transform.SetParent(arm.attachPoint);
-            enemy.transform.localPosition = Vector3.zero;
-            enemy.transform.localRotation = Quaternion.identity;
+            var direction = (enemy.transform.position - player.transform.position).normalized;
+
+            var arm = player.arm;
+            arm.transform.position = enemy.transform.position;
+            arm.transform.rotation = Quaternion.LookRotation(direction);
+
+            arm.Initialize(false);
+            arm.gameObject.SetActive(true);
+            arm.OnPlayerReached += OnPlayerReached;
+            arm.LaunchToTarget(player.transform.position);
+
 
             // 적의 물리 비활성화
             DisableEnemyPhysics(enemy.gameObject);
         }
     }
 
+    private void OnPlayerReached(Actor player)
+    {
+        var arm = player.GetComponent<Player>().arm;
+        var enemy = arm.enemy.gameObject;
+        enemy.transform.SetParent(null);
+        EnableEnemyPhysics(enemy);
+
+        player.GetComponent<Player>().OnArmReached();
+    }
+
 
     private void DisableEnemyPhysics(GameObject enemy)
     {
-        // Rigidbody 처리
-        var rigidbody = enemy.GetComponent<Rigidbody>();
-        if (rigidbody != null)
-        {
-            rigidbody.isKinematic = true;
-            rigidbody.detectCollisions = false;
-        }
-
         // 콜리더 비활성화 (다른 오브젝트와 충돌 방지)
         var colliders = enemy.GetComponents<Collider>();
         foreach (var collider in colliders)
@@ -45,14 +53,6 @@ public class PullArmEffect : Effect
 
     private void EnableEnemyPhysics(GameObject enemy)
     {
-        // Rigidbody 처리
-        var rigidbody = enemy.GetComponent<Rigidbody>();
-        if (rigidbody != null)
-        {
-            rigidbody.isKinematic = false;
-            rigidbody.detectCollisions = true;
-        }
-
         // 콜리더 다시 활성화
         var colliders = enemy.GetComponents<Collider>();
         foreach (var collider in colliders)

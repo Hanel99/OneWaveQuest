@@ -53,4 +53,36 @@ public class SkillManager : MonoBehaviour
             skills.Remove(skill);
         }
     }
+
+    public Skill GetSkill<T>() where T : Skill
+    {
+        foreach (var skill in skills)
+        {
+            if (skill is T)
+            {
+                return skill;
+            }
+        }
+        Debug.LogError($"No skill found of type {typeof(T)}");
+        return null;
+    }
+
+
+
+
+
+    public void UseThrowArmSkill(Actor source, Actor target, Vector3 targetPosition)
+    {
+        var throwArmSkill = new ThrowArmSkill();
+        RegisterSkill(throwArmSkill);
+        throwArmSkill.SetEffectList(source, target, targetPosition);
+        if (throwArmSkill.ApplySkill(source, target, targetPosition))
+        {
+            Debug.Log("ThrowArmSkill applied successfully.");
+        }
+        else
+        {
+            Debug.LogWarning("Failed to apply ThrowArmSkill.");
+        }
+    }
 }

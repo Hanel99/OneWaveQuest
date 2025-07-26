@@ -22,6 +22,10 @@ public class ThrowArmSkill : Skill
         throwArmEffect.skill = this;
         throwArmEffect.targetPosition = target == null ? targetPosition : target.transform.position;
         EffectList.Add(throwArmEffect);
+
+        var pullArmEffect = new PullArmEffect();
+        pullArmEffect.skill = this;
+        EffectList.Add(pullArmEffect);
     }
 
     public override bool ApplySkill(Actor source, Actor target, Vector3 targetPosition)

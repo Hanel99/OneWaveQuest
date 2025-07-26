@@ -36,6 +36,14 @@ public class ThrowArmEffect : Effect
     // 이벤트 핸들러 예시
     private void OnEnemyDetected(Actor enemy)
     {
+        var player = GamaManager.Instance.player;
+
+        enemy.transform.SetParent(player.arm.attachPoint);
+        player.arm.enemy = enemy.GetComponent<Enemy>(); // 팔이 붙잡은 적
+
         enemy.GetComponent<Enemy>().OnGrabbed();
+        this.End(player, enemy, targetPosition);
     }
+
+
 }

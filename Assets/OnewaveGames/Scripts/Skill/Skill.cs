@@ -13,4 +13,10 @@ public abstract class Skill
     public abstract void SetEffectList(Actor source, Actor target, Vector3 targetPosition);
     public abstract bool ApplySkill(Actor source, Actor target, Vector3 targetPosition);
     public abstract void EndSkill();
+
+    public struct SkillOptionData
+    {
+        // 스킬에 필요한 데이터들을 넣어 같이 보낼 구조체
+        public Vector3 targetPosition;
+    }
 }
