@@ -23,7 +23,7 @@ public class ObjectPool : MonoBehaviour
     void Start()
     {
         // 초기화 작업
-        RegisterProjectileType(SkillManager.Instance.armProjectilePrefab, 10);
+        // RegisterProjectileType(SkillManager.Instance.armProjectilePrefab, 10);
     }
 
     // 풀에 Projectile 추가

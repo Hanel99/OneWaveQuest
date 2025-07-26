@@ -17,6 +17,7 @@ public class Arm : Projectile
 
     // 상태
     private bool isActive = true;
+    public bool IsActive => isActive;
     private Actor detectedEnemy;
 
 
@@ -105,7 +106,8 @@ public class Arm : Projectile
             isMoving = false;
 
             Debug.Log("투사체가 최대 거리에 도달했습니다");
-            this.ReturnToPool();
+            isActive = false;
+            this.gameObject.SetActive(false); // 투사체 비활성화
             return;
         }
 
@@ -146,7 +148,8 @@ public class Arm : Projectile
 
             // 이벤트 호출
             OnEnemyDetected?.Invoke(detectedEnemy);
-            this.ReturnToPool(); // 투사체 풀로 반환
+            isActive = false;
+            this.gameObject.SetActive(false); // 투사체 비활성화
         }
     }
 

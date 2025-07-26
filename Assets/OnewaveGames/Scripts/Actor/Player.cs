@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class Player : Actor
 {
+    public Arm arm;
 
     [Header("Movement Settings")]
     public float rotationSpeed = 720f;
@@ -13,7 +14,6 @@ public class Player : Actor
     // 입력 값 저장
     private Vector2 moveInput;
     private bool leftClickPressed;
-    private bool isCoolDown = false;
 
     // 컴포넌트
     private Camera playerCamera;
@@ -32,7 +32,7 @@ public class Player : Actor
 
     void HandleMovement()
     {
-        if (moveInput != Vector2.zero && isCoolDown == false)
+        if (moveInput != Vector2.zero && arm.IsActive == false)
         {
             // 카메라 기준으로 이동 방향 계산
             Vector3 cameraForward = playerCamera.transform.forward;
@@ -139,20 +139,10 @@ public class Player : Actor
         if (throwArmSkill.ApplySkill(this, null, targetPosition))
         {
             Debug.Log("ThrowArmSkill applied successfully.");
-            StartCoroutine(Co_CoolDown(GamaManager.Instance.armSkillData.cooldownTime));
         }
         else
         {
             Debug.LogWarning("Failed to apply ThrowArmSkill.");
         }
-    }
-
-
-    IEnumerator Co_CoolDown(float coolDownTime)
-    {
-        // 쿨타임 동안 대기
-        isCoolDown = true;
-        yield return new WaitForSeconds(coolDownTime);
-        isCoolDown = false;
     }
 }

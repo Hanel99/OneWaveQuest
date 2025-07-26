@@ -17,16 +17,15 @@ public class ThrowArmEffect : Effect
             var playerPosition = player.transform.position;
             var direction = (targetPosition - playerPosition).normalized;
 
-            var currentArm = ObjectPool.Instance.GetProjectile<Arm>();
-            currentArm.transform.position = playerPosition;
-            currentArm.transform.rotation = Quaternion.LookRotation(direction);
-            currentArm.gameObject.SetActive(true);
+            // var currentArm = ObjectPool.Instance.GetProjectile<Arm>();
+            var arm = player.arm;
+            arm.transform.position = playerPosition;
+            arm.transform.rotation = Quaternion.LookRotation(direction);
 
-            var projectile = currentArm.GetComponent<Arm>();
-
-            projectile.Initialize();
-            projectile.OnEnemyDetected += OnEnemyDetected;
-            projectile.LaunchToTarget(targetPosition);
+            arm.Initialize();
+            arm.OnEnemyDetected += OnEnemyDetected;
+            arm.gameObject.SetActive(true);
+            arm.LaunchToTarget(targetPosition);
         }
         else
         {
