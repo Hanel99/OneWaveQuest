@@ -9,6 +9,8 @@ public class HitEnemyEffect : Effect
 {
     public override void Apply(Actor source, Actor target)
     {
+        effectType = EnumHelper.EffectType.HitEnemyEffect;
+
         if (source is Player player && target is Enemy enemy)
         {
             // 플레이어가 적을 공격하는 효과 적용

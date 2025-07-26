@@ -11,6 +11,8 @@ public class PlaySFXEffect : Effect
 
     public override void Apply(Actor source, Actor target)
     {
+        effectType = EnumHelper.EffectType.PlaySFXEffect;
+
         if (SFX != null)
         {
             AudioSource.PlayClipAtPoint(SFX, target.transform.position);
