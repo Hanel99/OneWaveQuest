@@ -25,10 +25,6 @@ public class PullArmEffect : Effect
             arm.gameObject.SetActive(true);
             arm.OnPlayerReached += OnPlayerReached;
             arm.LaunchToTarget(player.transform.position);
-
-
-            // 적의 물리 비활성화
-            DisableEnemyPhysics(enemy.gameObject);
         }
     }
 
@@ -37,29 +33,8 @@ public class PullArmEffect : Effect
         var arm = player.GetComponent<Player>().arm;
         var enemy = arm.enemy.gameObject;
         enemy.transform.SetParent(null);
-        EnableEnemyPhysics(enemy);
 
         player.GetComponent<Player>().OnArmReached();
-    }
-
-
-    private void DisableEnemyPhysics(GameObject enemy)
-    {
-        // 콜리더 비활성화 (다른 오브젝트와 충돌 방지)
-        // var colliders = enemy.GetComponents<Collider>();
-        // foreach (var collider in colliders)
-        // {
-        //     collider.enabled = false;
-        // }
-    }
-
-    private void EnableEnemyPhysics(GameObject enemy)
-    {
-        // 콜리더 다시 활성화
-        // var colliders = enemy.GetComponents<Collider>();
-        // foreach (var collider in colliders)
-        // {
-        //     collider.enabled = true;
-        // }
+        this.End(player, null, Vector3.zero); // PullArmEffect는 targetPosition이 필요하지 않으므로 Vector3.zero로 전달합니다.
     }
 }

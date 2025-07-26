@@ -6,6 +6,7 @@ public class SkillManager : MonoBehaviour
 {
     public static SkillManager Instance { get; private set; }
     public List<Skill> skills = new List<Skill>();
+    public ArmSkillData armSkillData;
 
     void Awake()
     {
@@ -29,7 +30,7 @@ public class SkillManager : MonoBehaviour
         }
     }
 
-    public void UnregisterSkill(EnumHelper.SkillType skillType)
+    public void RemoveSkill(EnumHelper.SkillType skillType)
     {
         var skill = skills.Find(s => s.skillType == skillType);
         if (skill != null)

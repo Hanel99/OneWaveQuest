@@ -13,7 +13,9 @@ public class UseHPEffect : Effect
     {
         effectType = EnumHelper.EffectType.UseHPEffect;
 
-        source.RestoreHealth(healthCost);
-        Debug.Log("Player uses HP effect on self");
+        target.RestoreHealth(healthCost);
+        Debug.Log($"{healthCost} 체력 증감. -> 현재 {source.actorStatData.CurrentHealth}");
+
+        this.End(source, target, Vector3.zero);
     }
 }

@@ -18,5 +18,7 @@ public class PlayVFXEffect : Effect
             GameObject vfxInstance = Object.Instantiate(VFXPrefab, target.transform.position, Quaternion.identity);
             Object.Destroy(vfxInstance, 5f); // Destroy after 5 seconds to clean up
         }
+
+        this.End(source, target, Vector3.zero);
     }
 }

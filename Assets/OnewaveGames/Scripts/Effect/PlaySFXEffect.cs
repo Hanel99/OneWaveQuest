@@ -17,5 +17,7 @@ public class PlaySFXEffect : Effect
         {
             AudioSource.PlayClipAtPoint(SFX, target.transform.position);
         }
+
+        this.End(source, target, Vector3.zero);
     }
 }

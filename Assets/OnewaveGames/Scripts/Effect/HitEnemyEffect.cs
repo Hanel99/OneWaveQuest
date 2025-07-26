@@ -15,11 +15,13 @@ public class HitEnemyEffect : Effect
         {
             // 플레이어가 적을 공격하는 효과 적용
             enemy.TakeDamage(player.actorStatData.AttackPower);
-            Debug.Log("Player hits the enemy");
+            Debug.Log($"{enemy.name}에게 {player.actorStatData.AttackPower} 데미지. -> 현재 {enemy.actorStatData.CurrentHealth}");
         }
         else
         {
             Debug.LogWarning("HitEnemyEffect can only be applied by a Player to an Enemy.");
         }
+
+        this.End(source, target, Vector3.zero);
     }
 }

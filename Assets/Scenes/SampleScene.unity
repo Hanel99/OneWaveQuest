@@ -424,9 +424,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   enemy: {fileID: 0}
-  playerStatData: {fileID: 11400000, guid: 47707bdbe5dc42b4eafbd4ce3c88ec71, type: 2}
-  enemyStatData: {fileID: 11400000, guid: 3217342601232954ea6617381cea45be, type: 2}
-  armSkillData: {fileID: 11400000, guid: c7e907c75e5002a4fa2b0be8e5d004fb, type: 2}
 --- !u!114 &1048515657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,6 +436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f16823c0d0572c14d89ab75a686f31ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  armSkillData: {fileID: 11400000, guid: c7e907c75e5002a4fa2b0be8e5d004fb, type: 2}
 --- !u!114 &1048515658
 MonoBehaviour:
   m_ObjectHideFlags: 0

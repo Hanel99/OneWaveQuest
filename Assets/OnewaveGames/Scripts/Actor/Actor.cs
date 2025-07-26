@@ -23,10 +23,21 @@ public class Actor : MonoBehaviour
     }
 
 
-    void Start()
+    public void Start()
     {
         // 컴포넌트 가져오기
         characterController = GetComponent<CharacterController>();
+        InitData();
+    }
+    public virtual void InitData()
+    {
+        SetStatData();
+    }
+
+    public void SetStatData()
+    {
+        actorStatData.SetCurrentHealth(actorStatData.MaxHealth);
+        actorStatData.SetCurrentMana(actorStatData.MaxMana);
     }
 
 

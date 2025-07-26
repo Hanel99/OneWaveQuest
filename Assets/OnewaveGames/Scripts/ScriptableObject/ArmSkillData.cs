@@ -17,11 +17,11 @@ public class ArmSkillData : ScriptableObject
     [Tooltip("에너미 감지 반경")]
     public float detectionRadius = 1f;
 
+    [Tooltip("필요한 마나")]
+    public int requireMana = 5;
 
-
-    [Header("데미지 설정")]
     [Tooltip("잡힌 에너미에게 주는 데미지")]
-    public int enemyDamage = 50;
+    public int enemyDamage = 30;
 
 
 

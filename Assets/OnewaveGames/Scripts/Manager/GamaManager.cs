@@ -10,11 +10,6 @@ public class GamaManager : MonoBehaviour
     public Enemy enemy;
 
 
-    // 게임에 필요한 데이터들. 임시로 게임매니저에서 통합 관리.
-    public ActorStatData playerStatData;
-    public ActorStatData enemyStatData;
-    public ArmSkillData armSkillData;
-
 
     void Awake()
     {
@@ -46,5 +41,12 @@ public class GamaManager : MonoBehaviour
         {
             enemy = FindObjectOfType<Enemy>();
         }
+    }
+
+
+    public void OnReset()
+    {
+        Debug.Log("F5 pressed, reloading scene...");
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 }

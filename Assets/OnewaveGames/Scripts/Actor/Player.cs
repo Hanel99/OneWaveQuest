@@ -21,9 +21,10 @@ public class Player : Actor
     private bool isOnCooldown = false;
 
 
-    void Start()
+    public override void InitData()
     {
         // 컴포넌트 가져오기
+        base.InitData();
         playerCamera = Camera.main;
     }
 
@@ -90,15 +91,33 @@ public class Player : Actor
         if (value.isPressed && isOnCooldown == false)
         {
             leftClickPressed = true;
-            StartCoroutine(ArmCooldownCoroutine());
+
         }
     }
 
-    public void OnReset()
+    void PerformAttack()
     {
-        Debug.Log("F5 pressed, reloading scene...");
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        // 마우스 위치로 레이캐스트
+        Ray ray = playerCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f))
+        {
+            Debug.Log($"클릭 좌표: {hit.point}");
+
+            if (actorStatData.CurrentMana > arm.skillData.requireMana)
+            {
+                // 팔 스킬 적용
+                ApplySkill(hit.point);
+                StartCoroutine(ArmCooldownCoroutine());
+            }
+            else
+            {
+                Debug.Log("마나가 부족합니다.");
+            }
+        }
     }
+
+
 
     private IEnumerator ArmCooldownCoroutine()
     {
@@ -110,22 +129,6 @@ public class Player : Actor
         isOnCooldown = false;
         Debug.Log($"팔 쿨다운 종료");
     }
-
-
-
-    void PerformAttack()
-    {
-        // 마우스 위치로 레이캐스트
-        Ray ray = playerCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-
-        if (Physics.Raycast(ray, out RaycastHit hit, 100f))
-        {
-            Debug.Log($"클릭 좌표: {hit.point}");
-
-            ApplySkill(hit.point);
-        }
-    }
-
 
 
     public void OnArmReached()

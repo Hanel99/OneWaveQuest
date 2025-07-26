@@ -19,10 +19,20 @@ public class ThrowArmSkill : Skill
         skillType = EnumHelper.SkillType.ThrowArmSkill;
         EffectList.Clear();
 
+        var useMPEffect = new UseMPEffect();
+        useMPEffect.skill = this;
+        useMPEffect.manaCost = -SkillManager.Instance.armSkillData.requireMana; // MP 소모량 설정
+        EffectList.Add(useMPEffect);
+
         var throwArmEffect = new ThrowArmEffect();
         throwArmEffect.skill = this;
         throwArmEffect.targetPosition = target == null ? targetPosition : target.transform.position;
         EffectList.Add(throwArmEffect);
+
+
+        var hitEnemyEffect = new HitEnemyEffect();
+        hitEnemyEffect.skill = this;
+        EffectList.Add(hitEnemyEffect);
 
         var pullArmEffect = new PullArmEffect();
         pullArmEffect.skill = this;
@@ -33,12 +43,14 @@ public class ThrowArmSkill : Skill
     {
         if (EffectList.Count > 0)
         {
-            EffectList[0].Apply(source, target);
+            var effect = EffectList[0];
             EffectList.RemoveAt(0); // 첫 번째 효과를 적용한 후 리스트에서 제거합니다.
+            effect.Apply(source, target);
             return true; // 스킬 적용 성공
         }
         else
         {
+            EndSkill();
             return false; // 효과가 설정되지 않은 경우 스킬 적용 실패
         }
     }
@@ -46,6 +58,7 @@ public class ThrowArmSkill : Skill
     public override void EndSkill()
     {
         Debug.Log("ThrowArmSkill has ended.");
+        SkillManager.Instance.RemoveSkill(skillType); // 스킬 매니저에서 스킬 제거
 
     }
 
