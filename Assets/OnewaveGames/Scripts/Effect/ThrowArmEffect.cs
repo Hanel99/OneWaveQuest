@@ -41,6 +41,10 @@ public class ThrowArmEffect : Effect
         var player = GamaManager.Instance.player;
 
         enemy.transform.SetParent(player.arm.attachPoint);
+        enemy.transform.localPosition = Vector3.zero;
+        // y값만 유지, x/z는 0
+        var currentY = enemy.transform.eulerAngles.y;
+        enemy.transform.rotation = Quaternion.Euler(0, currentY, 0);
         player.arm.enemy = enemy.GetComponent<Enemy>(); // 팔이 붙잡은 적
 
         enemy.GetComponent<Enemy>().OnGrabbed();

@@ -14,13 +14,13 @@ public class ActorStatData : ScriptableObject
 
 
     [Tooltip("Actor의 최대 MP")]
-    [SerializeField] private int maxMana = 50;
+    [SerializeField] private int maxMana = 100;
     [Tooltip("Actor의 현재 MP")]
-    [SerializeField] private int currentMana = 50;
+    [SerializeField] private int currentMana = 100;
 
 
     [Tooltip("Actor의 이동 속도")]
-    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed = 15f;
 
 
     [Header("공격력 설정")]

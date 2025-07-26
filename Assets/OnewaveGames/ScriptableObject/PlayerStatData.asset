@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 100
-  maxMana: 50
-  currentMana: 50
-  moveSpeed: 5
+  maxMana: 100
+  currentMana: 100
+  moveSpeed: 15
   attackPower: 10

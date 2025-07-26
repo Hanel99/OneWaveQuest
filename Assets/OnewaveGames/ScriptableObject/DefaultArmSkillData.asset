@@ -16,7 +16,8 @@ MonoBehaviour:
   armSpeed: 30
   maxDistance: 20
   detectionRadius: 1
-  enemyDamage: 50
-  cooldownTime: 3
+  requireMana: 5
+  enemyDamage: 30
+  cooldownTime: 2.5
   enemyPlacementDistance: 3
   returnSpeedMultiplier: 1.5

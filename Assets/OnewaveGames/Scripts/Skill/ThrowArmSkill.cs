@@ -32,6 +32,7 @@ public class ThrowArmSkill : Skill
 
         var hitEnemyEffect = new HitEnemyEffect();
         hitEnemyEffect.skill = this;
+        hitEnemyEffect.damageAmount = SkillManager.Instance.armSkillData.enemyDamage; // 데미지 설정
         EffectList.Add(hitEnemyEffect);
 
         var pullArmEffect = new PullArmEffect();

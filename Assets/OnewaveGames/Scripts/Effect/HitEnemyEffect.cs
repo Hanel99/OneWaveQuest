@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public class HitEnemyEffect : Effect
 {
+    public int damageAmount = 10; // 기본 데미지 값
+
     public override void Apply(Actor source, Actor target)
     {
         effectType = EnumHelper.EffectType.HitEnemyEffect;
@@ -14,8 +16,8 @@ public class HitEnemyEffect : Effect
         if (source is Player player && target is Enemy enemy)
         {
             // 플레이어가 적을 공격하는 효과 적용
-            enemy.TakeDamage(player.actorStatData.AttackPower);
-            Debug.Log($"{enemy.name}에게 {player.actorStatData.AttackPower} 데미지. -> 현재 {enemy.actorStatData.CurrentHealth}");
+            enemy.TakeDamage(damageAmount);
+            Debug.Log($"{enemy.name}에게 {damageAmount} 데미지. -> 현재 {enemy.actorStatData.CurrentHealth}");
         }
         else
         {

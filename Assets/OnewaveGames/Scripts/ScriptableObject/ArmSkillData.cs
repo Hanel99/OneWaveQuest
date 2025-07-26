@@ -27,7 +27,7 @@ public class ArmSkillData : ScriptableObject
 
     [Header("고급 설정")]
     [Tooltip("팔 던지기 쿨다운 시간")]
-    public float cooldownTime = 3f;
+    public float cooldownTime = 2.5f;
 
     [Tooltip("에너미를 플레이어 앞에 배치하는 거리")]
     public float enemyPlacementDistance = 3f;
