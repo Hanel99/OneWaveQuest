@@ -12,10 +12,10 @@ public class ArmSkillData : ScriptableObject
     public float armSpeed = 30f;
 
     [Tooltip("최대 던지기 거리")]
-    public float maxDistance = 15f;
+    public float maxDistance = 20f;
 
     [Tooltip("에너미 감지 반경")]
-    public float detectionRadius = 0.5f;
+    public float detectionRadius = 1f;
 
 
 
@@ -27,11 +27,11 @@ public class ArmSkillData : ScriptableObject
 
     [Header("고급 설정")]
     [Tooltip("팔 던지기 쿨다운 시간")]
-    public float cooldownTime = 2f;
+    public float cooldownTime = 3f;
 
     [Tooltip("에너미를 플레이어 앞에 배치하는 거리")]
-    public float enemyPlacementDistance = 2f;
+    public float enemyPlacementDistance = 3f;
 
     [Tooltip("복귀 시 속도 배율 (1.0 = 던질 때와 같은 속도)")]
-    public float returnSpeedMultiplier = 1.2f;
+    public float returnSpeedMultiplier = 1.5f;
 }

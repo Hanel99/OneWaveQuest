@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armProjectilePrefab: {fileID: 8730835212162200801, guid: 3c9ae1e3d3aef7643b3f217349e77469, type: 3}
   armSpeed: 30
-  maxDistance: 15
-  detectionRadius: 0.5
+  maxDistance: 20
+  detectionRadius: 1
   enemyDamage: 50
-  cooldownTime: 2
-  enemyPlacementDistance: 2
-  returnSpeedMultiplier: 1.2
+  cooldownTime: 5
+  enemyPlacementDistance: 3
+  returnSpeedMultiplier: 1.5

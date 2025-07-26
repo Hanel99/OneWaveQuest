@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -17,6 +18,8 @@ public class Player : Actor
 
     // 컴포넌트
     private Camera playerCamera;
+    private bool isOnCooldown = false;
+
 
     void Start()
     {
@@ -74,16 +77,6 @@ public class Player : Actor
     public void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
-
-        // if (moveInput.y > 0)
-        //     Debug.Log("위쪽 입력");
-        // else if (moveInput.y < 0)
-        //     Debug.Log("아래쪽 입력");
-
-        // if (moveInput.x > 0)
-        //     Debug.Log("오른쪽 입력");
-        // else if (moveInput.x < 0)
-        //     Debug.Log("왼쪽 입력");
     }
 
     // public void OnLook(InputAction.CallbackContext context)
@@ -94,19 +87,29 @@ public class Player : Actor
 
     public void OnFire(InputValue value)
     {
-        if (value.isPressed)
+        if (value.isPressed && isOnCooldown == false)
         {
             leftClickPressed = true;
+            StartCoroutine(ArmCooldownCoroutine());
         }
     }
 
-    void OnReset()
+    public void OnReset()
     {
         Debug.Log("F5 pressed, reloading scene...");
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
+    private IEnumerator ArmCooldownCoroutine()
+    {
+        isOnCooldown = true;
+        var armCooldown = arm.skillData.cooldownTime;
+        Debug.Log($"팔 쿨다운 시작 - {armCooldown}초");
+        yield return new WaitForSeconds(armCooldown);
 
+        isOnCooldown = false;
+        Debug.Log($"팔 쿨다운 종료");
+    }
 
 
 
@@ -115,20 +118,11 @@ public class Player : Actor
         // 마우스 위치로 레이캐스트
         Ray ray = playerCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-
         if (Physics.Raycast(ray, out RaycastHit hit, 100f))
         {
             Debug.Log($"클릭 좌표: {hit.point}");
 
             ApplySkill(hit.point);
-
-            // 공격 대상 처리
-            // if (hit.collider.CompareTag("Enemy"))
-            // {
-            //     Debug.Log("Enemy hit detected");
-            //     ApplySkill(hit.collider.transform.parent.GetComponent<Actor>());
-            // }
-
         }
     }
 
