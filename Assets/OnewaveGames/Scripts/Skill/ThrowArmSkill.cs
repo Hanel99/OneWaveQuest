@@ -16,6 +16,7 @@ public class ThrowArmSkill : Skill
 {
     public override void SetEffectList(Actor source, Actor target, Vector3 targetPosition)
     {
+        skillType = EnumHelper.SkillType.ThrowArmSkill;
         EffectList.Clear();
 
         var throwArmEffect = new ThrowArmEffect();

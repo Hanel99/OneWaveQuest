@@ -11,6 +11,8 @@ public class PlayVFXEffect : Effect
 
     public override void Apply(Actor source, Actor target)
     {
+        effectType = EnumHelper.EffectType.PlayVFXEffect;
+
         if (VFXPrefab != null)
         {
             GameObject vfxInstance = Object.Instantiate(VFXPrefab, target.transform.position, Quaternion.identity);

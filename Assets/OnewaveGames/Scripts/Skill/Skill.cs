@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public abstract class Skill
 {
+    public EnumHelper.SkillType skillType;
     public List<Effect> EffectList { get; } = new();
 
 

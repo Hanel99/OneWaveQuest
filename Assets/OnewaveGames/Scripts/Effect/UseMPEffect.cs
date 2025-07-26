@@ -11,6 +11,8 @@ public class UseManaEffect : Effect
 
     public override void Apply(Actor source, Actor target)
     {
+        effectType = EnumHelper.EffectType.UseMPEffect;
+
         source.RestoreMana(manaCost);
         Debug.Log("Player uses MP effect on self");
     }

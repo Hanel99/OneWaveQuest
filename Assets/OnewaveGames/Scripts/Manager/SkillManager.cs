@@ -5,9 +5,6 @@ using UnityEngine;
 public class SkillManager : MonoBehaviour
 {
     public static SkillManager Instance { get; private set; }
-
-    [Header("투사체 프리팹(어드레서블로 분리 필요)")]
-    public Arm armProjectilePrefab;
     public List<Skill> skills = new List<Skill>();
 
     void Awake()
@@ -24,20 +21,6 @@ public class SkillManager : MonoBehaviour
     }
 
 
-
-
-    // 프로젝타일 프리팹 가져오는 코드... 어드레서블로 분리 필요
-    public Projectile GetProjectilePrefab<T>() where T : Projectile
-    {
-        if (typeof(T) == typeof(Arm)) return armProjectilePrefab;
-
-        Debug.LogError($"No projectile prefab found for type {typeof(T)}");
-        return null;
-    }
-
-
-
-
     public void RegisterSkill(Skill skill)
     {
         if (!skills.Contains(skill))
@@ -46,19 +29,20 @@ public class SkillManager : MonoBehaviour
         }
     }
 
-    public void UnregisterSkill(Skill skill)
+    public void UnregisterSkill(EnumHelper.SkillType skillType)
     {
-        if (skills.Contains(skill))
+        var skill = skills.Find(s => s.skillType == skillType);
+        if (skill != null)
         {
             skills.Remove(skill);
         }
     }
 
-    public Skill GetSkill<T>() where T : Skill
+    public Skill GetSkill<T>(EnumHelper.SkillType skillType) where T : Skill
     {
         foreach (var skill in skills)
         {
-            if (skill is T)
+            if (skill is T && skill.skillType == skillType)
             {
                 return skill;
             }

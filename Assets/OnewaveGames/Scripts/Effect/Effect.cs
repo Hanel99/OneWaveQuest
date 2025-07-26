@@ -8,6 +8,7 @@ using UnityEngine;
 public abstract class Effect
 {
     public Skill skill;    // 이 Effect가 속한 Skill
+    public EnumHelper.EffectType effectType; // Effect의 종류
     public abstract void Apply(Actor source, Actor target);
 
 

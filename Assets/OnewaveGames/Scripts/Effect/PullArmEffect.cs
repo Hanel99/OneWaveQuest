@@ -9,6 +9,8 @@ public class PullArmEffect : Effect
 {
     public override void Apply(Actor source, Actor target)
     {
+        effectType = EnumHelper.EffectType.PullArmEffect;
+
         if (source is Player player && target is Enemy enemy)
         {
             Debug.Log($"적을 붙입니다: {enemy.name}");
@@ -44,20 +46,20 @@ public class PullArmEffect : Effect
     private void DisableEnemyPhysics(GameObject enemy)
     {
         // 콜리더 비활성화 (다른 오브젝트와 충돌 방지)
-        var colliders = enemy.GetComponents<Collider>();
-        foreach (var collider in colliders)
-        {
-            collider.enabled = false;
-        }
+        // var colliders = enemy.GetComponents<Collider>();
+        // foreach (var collider in colliders)
+        // {
+        //     collider.enabled = false;
+        // }
     }
 
     private void EnableEnemyPhysics(GameObject enemy)
     {
         // 콜리더 다시 활성화
-        var colliders = enemy.GetComponents<Collider>();
-        foreach (var collider in colliders)
-        {
-            collider.enabled = true;
-        }
+        // var colliders = enemy.GetComponents<Collider>();
+        // foreach (var collider in colliders)
+        // {
+        //     collider.enabled = true;
+        // }
     }
 }

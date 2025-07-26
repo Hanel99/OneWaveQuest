@@ -12,6 +12,8 @@ public class ThrowArmEffect : Effect
 
     public override void Apply(Actor source, Actor target)
     {
+        effectType = EnumHelper.EffectType.ThrowArmEffect;
+
         if (source is Player player)
         {
             var playerPosition = player.transform.position;

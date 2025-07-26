@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Actor : MonoBehaviour
 {
-    public CapsuleCollider capsuleCollider;
     public CharacterController characterController;
     public ActorStatData actorStatData;
 
@@ -27,7 +26,6 @@ public class Actor : MonoBehaviour
     void Start()
     {
         // 컴포넌트 가져오기
-        capsuleCollider = GetComponent<CapsuleCollider>();
         characterController = GetComponent<CharacterController>();
     }
 

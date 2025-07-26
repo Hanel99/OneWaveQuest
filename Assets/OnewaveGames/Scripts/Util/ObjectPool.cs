@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
+    public Arm armProjectilePrefab;
     public static ObjectPool Instance { get; private set; }
+
 
     private Dictionary<System.Type, Queue<Projectile>> poolDictionary = new();
 
@@ -23,7 +25,7 @@ public class ObjectPool : MonoBehaviour
     void Start()
     {
         // 초기화 작업
-        // RegisterProjectileType(SkillManager.Instance.armProjectilePrefab, 10);
+        // RegisterProjectileType(armProjectilePrefab, 10);
     }
 
     // 풀에 Projectile 추가
@@ -53,7 +55,7 @@ public class ObjectPool : MonoBehaviour
         }
         else
         {
-            T prefab = SkillManager.Instance.GetProjectilePrefab<T>() as T;
+            T prefab = armProjectilePrefab as T;
             if (prefab != null)
             {
                 T obj = Instantiate(prefab, transform);

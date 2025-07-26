@@ -17,6 +17,6 @@ MonoBehaviour:
   maxDistance: 20
   detectionRadius: 1
   enemyDamage: 50
-  cooldownTime: 5
+  cooldownTime: 3
   enemyPlacementDistance: 3
   returnSpeedMultiplier: 1.5

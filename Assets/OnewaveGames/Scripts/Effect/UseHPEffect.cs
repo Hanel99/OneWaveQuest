@@ -11,6 +11,8 @@ public class UseHPEffect : Effect
 
     public override void Apply(Actor source, Actor target)
     {
+        effectType = EnumHelper.EffectType.UseHPEffect;
+
         source.RestoreHealth(healthCost);
         Debug.Log("Player uses HP effect on self");
     }
